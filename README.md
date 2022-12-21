@@ -30,6 +30,6 @@
 
 ***
 ### 일정표
-| 주차 | 날짜 | 주제 |  <img src="https://avatars.githubusercontent.com/u/91415701?v=4" width="50" height="50"> </br> JaehyoJJAng 
+| 주차 | 날짜 | 프로젝트 |  <img src="https://avatars.githubusercontent.com/u/91415701?v=4" width="50" height="50"> </br> JaehyoJJAng 
 | :--: | :--------------------------: | :--: | :-----------------: |
-| 1주차 | 12.22 | 정렬 | x |
+| 1주차 | 12.22 | 여러 개의 엑셀 판매보고서 합치기 | x |
