@@ -1,0 +1,4 @@
+python-docx
+requests
+bs4
+lxml
