@@ -3,6 +3,7 @@ import email
 from email import policy
 from config.config import get_secrets   
 # from win10toast import ToastNotifier
+from typing import List,Dict
 
 class Naver:
     def __init__(self) -> None:
@@ -12,7 +13,7 @@ class NaverEmail:
     def __init__(self) -> None:
         self._secrets : dict = get_secrets(key='SECRET')
     
-    def load_recent_email(self)-> list:
+    def load_recent_email(self)-> List[Dict[str,str]]:
         imap = imaplib.IMAP4_SSL('imap.naver.com')
 
         _id : str = self._secrets['smtp_user_id']
@@ -78,7 +79,7 @@ class NaverEmail:
         return save_data
 
 class WindowAlarm:
-    def alarm(self,data_list : list):
+    def alarm(self,data_list : list)-> None:
         toast = ToastNotifier()
 
         send_list = []
