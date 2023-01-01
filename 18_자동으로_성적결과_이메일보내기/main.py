@@ -6,6 +6,7 @@ from typing import Union
 import os
 import smtplib
 from email.mime.text import MIMEText
+from typing import Dict,List,Union
 
 class FakerData:
     def create_faker_data(self)-> dict:
@@ -49,7 +50,7 @@ class Xlsx:
         df.to_excel(fileName)
         print(f'{fileName} 파일 저장완료!\n')
 
-    def load_data(self,srcFile:str)-> dict:
+    def load_data(self,srcFile:str)-> Dict[str,List[Union[str,int]]]:
         """ Pandas로 데이터 로드 """
         df_from_excel = pd.read_excel(srcFile)
 
