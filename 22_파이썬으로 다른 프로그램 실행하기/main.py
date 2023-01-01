@@ -16,6 +16,13 @@ class Util:
         if memo_process.poll() == None:
             print('메모장을 종료합니다')
             memo_process.kill()
+    
+    def execute_other_py(self):
+        """ 다른 파이썬 파일 실행
+        ! script - print_hello.py 파일 생성 후 아래 코드 실행하도록 함 """
+        script: str = 'script/print_hello.py'
+        subprocess.call(f'python3 {script}', shell=True)
+        print(f'{script} - 실행완료')
 
 def main():
     # Util Instance
@@ -26,6 +33,10 @@ def main():
 
     # 윈도우 응용 프로그램 실행하기
     util.execute_app()
+
+    # 다른 파이썬 파일 실행하기
+    util.execute_other_py()
+
 
 if __name__ == '__main__':
     main()
