@@ -8,13 +8,14 @@ from docx.oxml.ns import qn
 from docx2pdf import convert
 import docx
 import os
-
+from typing import List,Dict
 
 class Xlsx:
-    def __init__(self,xlsxPath:str):
-        self.xlsxPath = xlsxPath 
+    def __init__(self,xlsxPath:str)-> None:
+        self.xlsxPath : str = xlsxPath 
     
-    def load_data(self)-> list:
+    def load_data(self)-> List[Dict[str,str]]:
+
         """ 엑셀에서 데이터 읽어오는 메서드 """
         wb = load_workbook(os.path.join(self.xlsxPath,'수료명단.xlsx'))
         ws = wb.active
@@ -33,11 +34,11 @@ class Xlsx:
         return datas
 
 class Word:
-    def __init__(self,docxPath:str,datas:list):
+    def __init__(self,docxPath:str,datas:list)-> None:
         self.docxPath : str = docxPath
         self.datas : list = datas
 
-    def load_docx(self):
+    def load_docx(self)-> None:
         """ 워드파일 읽어오는 메서드 """
         doc = Document(os.path.join(self.docxPath,'수료증양식.docx'))
         
@@ -46,7 +47,7 @@ class Word:
             text += str(i) + ": " + paragraph.text + '\n'
         print(text)
 
-    def edit_word_file(self):
+    def edit_word_file(self)-> None:
         """ 워드 파일 수정하는 메소드 """
         doc = Document(os.path.join(self.docxPath,'수료증양식.docx'))
 
@@ -82,7 +83,7 @@ class Word:
             # PDF 변환
             convert(os.path.join(savePath,fileName),os.path.join(savePath,fileName.replace('.docx','.pdf'))) 
 
-def main():
+def main()-> None:
     xlsxPath = './xlsx'
     docxPath = './docx'
 
