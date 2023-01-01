@@ -5,6 +5,7 @@ from collections import Counter
 import re
 from wordcloud import WordCloud
 from glob import glob
+from typing import List,Dict
 
 class Stemmer:
     def load_stemmer_word(self)-> None:
@@ -21,7 +22,7 @@ class Stemmer:
         print(f'okt : {okt.morphs(text)}')
         print(f'okt 명사 : {okt.nouns(text)}')
     
-    def change_word(self,data_list:list)-> list:
+    def change_word(self,data_list:list)-> List[str]:
         """ 형태소 리스트로 만들어 리턴 """
         okt = Okt()    
 
@@ -29,8 +30,6 @@ class Stemmer:
         noun_list : list = list()
 
         for data in data_list:
-            noun_dic : dict = dict()
-
             for noun in okt.nouns(data['title']):
                 if len(noun) > 1:
                     noun_list.append(noun)
@@ -42,7 +41,7 @@ class Stemmer:
         # 변환된 형태소 데이터모음 리턴
         return noun_list
 
-    def making_word_cloud(self,noun_list:list):
+    def making_word_cloud(self,noun_list:list)-> None:
         font = glob('../font/*.otf')[0]
 
         wc = WordCloud(font_path=font,width=400,height=400,scale=2.0,max_font_size=250)
@@ -62,7 +61,7 @@ class NewsCrawling:
         # headers
         self.headers : dict = {'User-Agent':'Mozilla/5.0','Content-Type':'text/html; charset=utf-8'}
     
-    def get_items(self) -> list:
+    def get_items(self) -> List[Dict[str,str]]:
         data_list : list = list()        
         with rq.Session() as session:
             with session.get(url=self.base_url,headers=self.headers) as response:
