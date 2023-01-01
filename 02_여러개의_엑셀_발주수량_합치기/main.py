@@ -2,22 +2,23 @@ import glob
 import os
 from openpyxl import load_workbook
 import pandas as pd
+from typing import List,Dict
 
 class FindFiles:
     """ 파일 찾는 클래스 """
-    def __init__(self,dir:str):
+    def __init__(self,dir:str)-> None:
         self.dir = dir
 
-    def get_xlsx_files(self)-> list:
+    def get_xlsx_files(self)-> List[str]:
         """ 발주서.xlsx 파일만 추출해서 리턴하는 메서드 """
         return glob.glob(os.path.join(self.dir,'발주서_*.xlsx'))
 
 class LoadXlsx:
     """ xlsx 데이터 읽는 클래스 """
-    def __init__(self,files:list):
+    def __init__(self,files:list)-> None:
         self.files : list = files
     
-    def load_data(self)-> list:
+    def load_data(self)-> List[Dict[str,str]]:
         area = []
         
         all_data = []
@@ -40,7 +41,7 @@ class LoadXlsx:
 
 class SaveNewXlsx:
     """ 발주수량 합치는 클래스 """
-    def __init__(self,all_data:list,dir:str):
+    def __init__(self,all_data:list,dir:str)-> None:
         self.all_data : list = all_data
         self.dir = dir
 
@@ -58,7 +59,7 @@ class SaveNewXlsx:
         # Excel Save
         df.to_excel(os.path.join(self.dir,'result.xlsx'))
 
-def main():
+def main()-> None:
     srcDir = './xlsx'
 
     # Get Files
