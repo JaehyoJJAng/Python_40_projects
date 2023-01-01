@@ -5,13 +5,14 @@ import datetime
 import pandas as pd
 from glob import glob
 import time
+from typing import Dict,List,Union
 
 class Slack:
     def __init__(self,webhook_url:str) -> None:
         self.webhook_url = webhook_url
 
     @staticmethod
-    def send_post(webhook_url:str,headers:dict,data:dict):
+    def send_post(webhook_url:str,headers:dict,data:dict)-> None:
         """ send post data to slack (waytothem channel) """
         with rq.Session() as session:
             with session.post(webhook_url,headers=headers,data=json.dumps(data)) as response :
@@ -33,7 +34,7 @@ class Slack:
             print('error')
 
 class Xlsx:
-    def load_data(self,filePath:str)-> dict:
+    def load_data(self,filePath:str)-> Dict[str,List[Union[str,int]]]:
         """ 데이터 읽어오기 """
         # 데이터 담을 딕셔너리 선언
         data_dic : dict = dict()
@@ -68,7 +69,7 @@ class Xlsx:
                 # 타임 대기
                 time.sleep(61.0)            
         time.sleep(1.0)
-def main():
+def main()-> None:
     # Xlsx Instance
     xlsx = Xlsx()
 
