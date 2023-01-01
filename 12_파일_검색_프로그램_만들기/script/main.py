@@ -1,11 +1,12 @@
 import os
 from datetime import datetime
+from typing import List,Dict,Union
 
 class FoundFiles:
     def __init__(self,dstPath:str) -> None:
         self.dstPath : str = dstPath
     
-    def found_ext(self)-> list:
+    def found_ext(self)-> List[Dict[any,any]]:
         """ 폴더에서 엑셀과 워드 파일을 찾아 리턴 """
         found_list : list = []
         for (path,dir,files) in os.walk(self.dstPath):
@@ -19,7 +20,7 @@ class FoundFiles:
                     found_list.append(file_dict)
         return found_list
 
-    def print_file_info(self,found_list:list)-> list:
+    def print_file_info(self,found_list:list)-> List[Dict[str,str]]:
         """ 파일 상세 정보 리턴 """
         file_infos : list = []
         for found in found_list:
@@ -48,7 +49,7 @@ class FoundFiles:
             file_infos.append(info_data)
         return file_infos
 
-    def check_date_file(self,file_infos:list)-> list:
+    def check_date_file(self,file_infos:list)-> List[str]:
         """ 최근 생성된 파일 찾아 리턴 """
         recent_files = []
         for file_info in file_infos:
@@ -64,7 +65,7 @@ class FoundFiles:
                 recent_files.append(file_info)
         return recent_files
 
-    def check_size_file(self,recent_files:list)-> list:
+    def check_size_file(self,recent_files:list)-> List[int]:
         """ 파일 용량이 10KBytes를 넘는 파일만 리턴 """
         kbyte_files : list = []
         for recent_file in recent_files:
@@ -73,7 +74,7 @@ class FoundFiles:
                 kbyte_files.append(recent_file)
         return kbyte_files
 
-def main():
+def main()-> None:
     dstPath = '../utils'
     founds = FoundFiles(dstPath=dstPath)
 
