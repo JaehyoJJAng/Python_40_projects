@@ -2,13 +2,14 @@ import glob
 import os 
 from openpyxl import Workbook
 from openpyxl import load_workbook
+from typing import Dict
 
 def load_files(dir:str)-> list:
     """ .xlsx 파일 모두 가져오는 함수 """
     files : list = [f for f in glob.glob(os.path.join(dir,'*.xlsx')) if "result" not in f]
     return files
 
-def load_data_in_xlsx(file:str)-> dict:
+def load_data_in_xlsx(file:str)-> Dict[str:str]:
     """ 엑셀 데이터 가져오는 함수 """
     wb = load_workbook(file,data_only=True)
     ws = wb.active
@@ -20,7 +21,7 @@ def load_data_in_xlsx(file:str)-> dict:
             }
     return data
  
-def create_result(datas:list,dir:str):
+def create_result(datas:list,dir:str)-> None:
     """ 합친 엑셀 파일들의 데이터를 result.xlsx로 만들기 """
 
     # result.xslx 파일이 있다면 엑셀 파일 불러오고 아니면 새로운 워크북 객체 생성
@@ -44,7 +45,7 @@ def create_result(datas:list,dir:str):
     wb.save(os.path.join(dir,'result.xlsx'))
     wb.close()
 
-def main():
+def main()-> None:
     # Source Directory
     DIR = './xlsx'
 
