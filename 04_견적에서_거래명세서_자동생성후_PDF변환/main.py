@@ -2,15 +2,16 @@
 import os
 from openpyxl import load_workbook
 from datetime import date
+from typing import List,Union,Tuple,Dict
 
 # ====== BASE DIRECOTRY ======
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR : str = os.path.dirname(os.path.abspath(__file__))
 # ======                ======
 class Xlsx:
-    def __init__(self,DirPath:str):
-        self.DirPath = DirPath
+    def __init__(self,DirPath:str)-> None:
+        self.DirPath : str = DirPath
 
-    def result_price(self,count_list:list,unitCost_list:list)-> list:
+    def result_price(self,count_list:list,unitCost_list:list)-> List[Union[str,int,dict,list]]:
         """ 가격 계산 메서드 """
         return [unitCost_list[idx] * count_list[idx] for idx in range(len(count_list))]
 
@@ -20,7 +21,7 @@ class Xlsx:
         ws = wb.active
         return (wb,ws)
 
-    def read_data_in_estimate(self)-> dict:
+    def read_data_in_estimate(self)-> Dict[Union[str,int],Union[str,int]]:
         """ 견적서 읽어오는 메소드 """
         # Save Dictionary
         save_dic = dict()
@@ -67,7 +68,7 @@ class Xlsx:
         # Data Return
         return save_dic
 
-    def write_data(self,estimate_datas:dict):
+    def write_data(self,estimate_datas:dict)-> None:
         """ 거래명세표에 값 기록하기 """
         wb,ws = self.set_workbook(fileName="거래명세표_샘플.xlsx")
 
@@ -94,7 +95,7 @@ class Xlsx:
         # Save
         self.save(wb=wb,estimater=estimate_datas['estimater'])
 
-    def save(self,wb,estimater:str):
+    def save(self,wb,estimater:str)-> None:
         """ 거래명세표 저장하기 """
         # 저장 경로
         savePath = os.path.abspath(f'result/{estimater}')
@@ -111,12 +112,12 @@ class Xlsx:
         # 출력
         print(f"저장 완료!\n{fileName}")
 
-    def convert_pdf(self):
+    def convert_pdf(self)-> None:
         """ 거래명세표 PDF로 변환
         pypiwin32 라이브러리가 설치가 안되는 관계로 Pass """
         pass
 
-def main():
+def main()-> None:
     DirPath = os.path.join(BASE_DIR,'xlsx')
 
     # Create XLSX Instance
