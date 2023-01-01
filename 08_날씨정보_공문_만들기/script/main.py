@@ -4,12 +4,13 @@ import re
 import docx
 from docx import Document
 from docx.oxml.ns import qn
+from typing import Dict
 
 class GetWeatherData:
     def __init__(self)-> None:
         self.url : str = 'http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4159054000'
 
-    def parsing(self)-> dict:
+    def parsing(self)-> Dict[str,str]:
         """ 날씨 정보 파싱 및 리턴 """
         with rq.Session() as session:
             with session.get(url=self.url) as res:
