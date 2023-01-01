@@ -4,7 +4,7 @@ import pandas as pd
 import glob
 
 class Xlsx:
-    def __init__(self,xlsxFiles:list):
+    def __init__(self,xlsxFiles:list)-> None:
         self.xlsxFiles : list = xlsxFiles
 
     def load_file(self)-> any:
@@ -49,7 +49,7 @@ class Xlsx:
         except Exception as e:
             print(f"{e}\n\n파일 저장 실패!")
 
-def main():
+def main()-> None:
     xlsxFiles : list = glob.glob(os.path.join('../xlsx','*.xlsx'))
 
     # Create Xlsx Instance
