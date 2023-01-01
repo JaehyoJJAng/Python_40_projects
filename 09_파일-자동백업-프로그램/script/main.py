@@ -4,13 +4,13 @@ import sys
 # from win10toast import ToasNotifier
 
 class WindowEvent:
-    def window_alarm(self,srcDir:str,dstDir:str):
+    def window_alarm(self,srcDir:str,dstDir:str)-> None:
         pass
         # toaster = ToastNotifier()
         # toaster.show_toast('백업이 완료되었습니다',f'{srcDir} >>> {dstDir}',duration=5) # 윈도우에 알림을 5초 동안 발생 시킴
 
 class Util:
-    def __init__(self):
+    def __init__(self)-> None:
         # Window Instance
         self.window = WindowEvent()
     @staticmethod
@@ -35,7 +35,7 @@ class Util:
 
         self.window.window_alarm(srcDir=srcDir,dstDir=dstDir)
 
-def main():
+def main()-> None:
     # Util Instance
     util = Util()
 
