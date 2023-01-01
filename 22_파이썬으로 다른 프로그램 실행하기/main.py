@@ -18,14 +18,14 @@ class Util:
             print('메모장을 종료합니다')
             memo_process.kill()
 
-    def execute_other_py(self):
+    def execute_other_py(self)-> None:
         """ 다른 파이썬 파일 실행
         ! script - print_hello.py 파일 생성 후 아래 코드 실행하도록 함 """
         script: str = 'script/print_hello.py'
         subprocess.call(f'python3 {script}', shell=True)
         print(f'{script} - 실행완료')
 
-    def manage_schedule(self):
+    def manage_schedule(self)-> None:
         """ 일정 관리하여 다른 프로그램 실행하기 """
         schedule.every(3).seconds.do(self.do_file_backup)
 
@@ -33,7 +33,7 @@ class Util:
             schedule.run_pending()
             time.sleep(1.0)
 
-    def do_file_backup(self):
+    def do_file_backup(self)-> None:
         """ 파일 백업 코드 - self.manage_schedule 메소드와 연계 """
 
         # 백업 대상 파일
@@ -54,7 +54,7 @@ class Util:
         subprocess.call(backup_command, shell=True)
         print('백업 프로그램 실행 완료!')
         
-def main():
+def main()-> None:
     # Util Instance
     util = Util()
 
