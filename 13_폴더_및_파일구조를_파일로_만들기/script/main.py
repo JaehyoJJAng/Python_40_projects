@@ -1,8 +1,9 @@
 import os
 import seedir as sd
+from typing import List,Dict
 
 class Util:
-    def load_path_files(self,srcPath:str)-> list:
+    def load_path_files(self,srcPath:str)-> List[Dict[str,str]]:
         """ 폴더 안의 모든 파일 읽어오기 """
         file_list = []
         for (path,dir,files) in os.walk(srcPath):
@@ -33,7 +34,7 @@ class Util:
         fileName = os.path.join(savePath,'tree.txt')
         with open(fileName,'w',encoding='UTF-8') as fp:
             fp.write(dir_tree)
-def main(): 
+def main()-> None: 
     srcPath = '../'
     
     # Util Instance
