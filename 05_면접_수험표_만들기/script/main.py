@@ -7,9 +7,10 @@ import pandas as pd
 from faker import Faker
 from pptx import Presentation
 from pptx.util import Pt
+from typing import List,Union,Dict
 
 class GetFaker:
-    def __init__(self,fakerPath:str):
+    def __init__(self,fakerPath:str)-> None:
         # Faker Instance
         self.faker = Faker('ko_KR')
 
@@ -19,11 +20,11 @@ class GetFaker:
     def get_names(self)-> None:
         """ 가짜이름 생성 메소드 """
         # 가짜 이름 생성
-        fake_name_list : list = [self.faker.name() for i in range(10)]
+        fake_name_list : List[str] = [self.faker.name() for i in range(10)]
 
         # 수험번호 생성
         # zfill(3) : 3자리로 빈자리는 0으로 채움
-        std_nums : list = [f"2022-{str(i).zfill(3)}" for i in range(1,10 + 1)]
+        std_nums : List[str] = [f"2022-{str(i).zfill(3)}" for i in range(1,10 + 1)]
 
         # Save
         self.save_faker(fake_names=fake_name_list,std_nums=std_nums)
@@ -39,10 +40,10 @@ class GetFaker:
         print(f'{fileName} - 파일 저장 완료!')
 
 class Xlsx:
-    def __init__(self,fakerPath:str):
-        self.fakerPath = fakerPath
+    def __init__(self,fakerPath:str)-> None:
+        self.fakerPath : str = fakerPath
 
-    def load_xlsx(self)-> dict:
+    def load_xlsx(self)-> Dict[str,str]:
         """ 엑셀 파일 읽고 리스트로 저장 """
         df_from_excel = pd.read_excel(os.path.join(self.fakerPath,'fakers.xlsx'))
 
@@ -56,14 +57,14 @@ class Xlsx:
         return data_dic
 
 class PPTX:
-    def __init__(self,identificationPath:str):
+    def __init__(self,identificationPath:str)-> None:
         self.identificationPath = identificationPath
 
-    def load_pptx(self):
+    def load_pptx(self)-> None:
         """ PPT 데이터 읽어오는 메소드 """
         # prs = Presentation(os.path.join(self.identificationPath,'수험표_샘플.pptx'))
 
-def make_iter(fakerPath:str,faker_datas:dict):
+def make_iter(fakerPath:str,faker_datas:dict)-> None:
     """ 반복가능한 객체로 만드는 함수 """
     name_list : list = faker_datas['name_list']
     std_nums  : list = faker_datas['std_nums']
@@ -74,7 +75,7 @@ def make_iter(fakerPath:str,faker_datas:dict):
     name = iter(df_from_excel['이름'])
     std  = iter(df_from_excel['수험번호'])
 
-def main():
+def main()-> None:
     FakerPath = '../faker'
     identificationPath = '../files'
 
